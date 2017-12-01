@@ -31,7 +31,7 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="typeAliasesPackage" value="cn.org.fjiot.hdHardServer.entity" />
 		<property name="dataSource" ref="dataSource" />
-		<property name="configuration" ref="configuration"></property>
+		<property name="configuration" ref="configuration" />
 		<property name="mapperLocations"
 			value="classpath:cn/org/fjiot/hdHardServer/mapper/*.xml"></property>
 	</bean>
