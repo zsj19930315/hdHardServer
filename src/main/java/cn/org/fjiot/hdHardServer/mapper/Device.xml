@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.fjiot.hdHardServer.mapper.DeviceMapper">
+	<!-- <resultMap type="Device" id="DeviceBean">
+		<id column="id" property="id"/>
+		<result column="device_no" property="deviceNo"/>
+		<result column="is_start" property="isStart"/>
+		<result column="electric" property="electric"/>
+		<result column="start_time" property="startTime"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="end_time" property="endTime"/>
+		<result column="user_id" property="userId"/>
+		<result column="room_bed" property="roomBed"/>
+		<result column="is_low_elec" property="isLowElec"/>
+		<result column="is_lose" property="isLose"/>
+		<result column="is_error" property="isError"/>
+		<result column="weight_sum" property="weightSum"/>
+		<result column="weight_threshold" property="weightThreshold"/>
+		<result column="weight_cur" property="weightCur"/>
+		<result column="is_low_level" property="isLowLevel"/>
+	</resultMap> -->
+	<insert id="add" parameterType="Device">
+		<selectKey resultType="string" keyProperty="id"
+			order="BEFORE">
+			select sys_guid() from dual
+		</selectKey>
+		insert into SJ_DEVICE values (#{id}, #{deviceNo}, #{isStart,jdbcType=VARCHAR}, #{electric,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roomBed,jdbcType=VARCHAR}, #{isLowElec,jdbcType=VARCHAR}, #{isLose,jdbcType=VARCHAR}, #{isError,jdbcType=VARCHAR}, #{weightSum,jdbcType=VARCHAR}, #{weightThreshold,jdbcType=VARCHAR}, #{weightCur,jdbcType=VARCHAR}, #{isLowLevel,jdbcType=VARCHAR})
+	</insert>
+	<update id="update" parameterType="Device">
+		update SJ_DEVICE 
+		<set>
+			<if test="deviceNo != null">DEVICE_NO = #{deviceNo},</if>
+			<if test="isStart != null">IS_START = #{isStart},</if>
+			<if test="electric != null">ELECTRIC = #{electric},</if>
+			<if test="startTime != null">START_TIME = #{startTime},</if>
+			<if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
+			<if test="endTime != null">END_TIME = #{endTime},</if>
+			<if test="userId != null">USER_ID = #{userId},</if>
+			<if test="roomBed != null">ROOM_BED = #{roomBed},</if>
+			<if test="isLowElec != null">IS_LOW_ELEC = #{isLowElec},</if>
+			<if test="isLose != null">IS_LOSE = #{isLose},</if>
+			<if test="isError != null">IS_ERROR = #{isError},</if>
+			<if test="weightSum != null">WEIGHT_SUM = #{weightSum},</if>
+			<if test="weightThreshold != null">WEIGHT_THRESHOLD = #{weightThreshold},</if>
+			<if test="weightCur != null">WEIGHT_CUR = #{weightCur},</if>
+			<if test="isLowLevel != null">IS_LOW_LEVEL = #{isLowLevel}</if>
+		</set>
+		where id = #{id}
+	</update>
+	<select id="selectList" resultType="Device">
+		select * from SJ_DEVICE
+	</select>
+	<select id="selectOne" parameterType="string" resultType="Device">
+		select * from SJ_DEVICE where DEVICE_NO = #{deviceNo}
+	</select>
+</mapper>
