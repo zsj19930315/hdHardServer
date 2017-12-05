@@ -31,7 +31,7 @@ public class TimeUtil {
 	public static String getNextTime() {
 		return "05dc";
 	}/*
-	 * 设置下次发送的时间（最长300000s-5分钟-7530）
+	 * 设置下次发送的时间（最长300000s-5分钟-7530
 	 */
 	public static String getNextTime(int mult) {
 		String timeString = Integer.toHexString(30000 / mult);
