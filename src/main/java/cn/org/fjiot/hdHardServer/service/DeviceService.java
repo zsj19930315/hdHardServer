@@ -81,8 +81,10 @@ public class DeviceService {
 		Device device = deviceMapper.selectOne(receive.deviceNo);
 		device.setUpdateTime(TimeUtil.getNowTime());
 		device.setIsLose("0");
+		String sumWeight = device.getWeightSum();
 		String lastWeight = device.getWeightCur();
 		String thresholdWeight = device.getWeightThreshold();
+		int sum = Util.string2Int(sumWeight);
 		int last = Util.string2Int(lastWeight);
 		int threshold = Util.string2Int(thresholdWeight);
 		int cur = Util.string2Int(receive.data);
@@ -97,14 +99,16 @@ public class DeviceService {
 			device.setIsError("1");
 			device.setWeightCur(lastWeight);
 			deviceMapper.update(device);
-			receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, TimeUtil.getNextTime());
+			int timeCount = (sum - last) * 10 / sum;
+			receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, TimeUtil.getNextTime(timeCount));
 			return receive;
 		}
+		int timeCount = (sum - cur) * 10 / sum;
 		device.setIsLowLevel("0");
 		device.setIsError("0");
 		device.setWeightCur(receive.data);
 		deviceMapper.update(device);
-		receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, TimeUtil.getNextTime());
+		receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, TimeUtil.getNextTime(timeCount));
 		return receive;
 	}
 
