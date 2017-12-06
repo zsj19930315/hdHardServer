@@ -15,13 +15,26 @@
 	<context:annotation-config />
 
 	<context:component-scan base-package="cn.org.fjiot.hdHardServer.*" />
-
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@192.168.200.199:1521:orcl" />
-		<property name="username" value="zhengshaojian" />
-		<property name="password" value="zhengshaojian" />
+	
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="filters" value="stat" />
+		<property name="maxActive" value="20" />
+		<property name="initialSize" value="1" />
+		<property name="maxWait" value="60000" />
+		<property name="minIdle" value="10" />
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="validationQuery" value="SELECT 1 FROM DUAL" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="50" />
 	</bean>
 
 	<bean id="configuration" class="org.apache.ibatis.session.Configuration">
@@ -33,7 +46,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="configuration" ref="configuration" />
 		<property name="mapperLocations"
-			value="classpath:cn/org/fjiot/hdHardServer/mapper/*.xml"></property>
+			value="classpath:cn/org/fjiot/hdHardServer/mapper/*.xml" />
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
