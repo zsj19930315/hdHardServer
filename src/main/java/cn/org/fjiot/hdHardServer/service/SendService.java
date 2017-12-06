@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import cn.org.fjiot.hdHardServer.other.RSBuffer;
 import cn.org.fjiot.hdHardServer.other.RSChannel;
 import cn.org.fjiot.hdHardServer.other.RSData;
+import cn.org.fjiot.hdHardServer.push.JiguangPush;
 import cn.org.fjiot.hdHardServer.util.Constants;
 import cn.org.fjiot.hdHardServer.util.Util;
 

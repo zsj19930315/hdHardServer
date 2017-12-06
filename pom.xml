@@ -135,6 +135,11 @@
 			<artifactId>druid</artifactId>
 			<version>1.1.6</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.jpush.api</groupId>
+			<artifactId>jpush-client</artifactId>
+			<version>3.3.3</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>hdHardServer</finalName>
@@ -146,6 +151,14 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
