@@ -88,9 +88,16 @@ public class DeviceService {
 		int last = Util.string2Int(lastWeight);
 		int threshold = Util.string2Int(thresholdWeight);
 		int cur = Util.string2Int(receive.data);
-		if (cur >= threshold) {
+		if (cur >= threshold && cur <= sum) {
 			device.setIsLowLevel("1");
 			device.setWeightCur(receive.data);
+			deviceMapper.update(device);
+			receive.alter(Constants.FUNCODE_CODE_ALARM, Constants.REPEAT_LEN_ONE, Constants.REPEAT_LEN_NODATA_ONE);
+			return receive;
+		}
+		if (cur > sum) {
+			device.setIsLowLevel("1");
+			device.setWeightCur(sumWeight);
 			deviceMapper.update(device);
 			receive.alter(Constants.FUNCODE_CODE_ALARM, Constants.REPEAT_LEN_ONE, Constants.REPEAT_LEN_NODATA_ONE);
 			return receive;
