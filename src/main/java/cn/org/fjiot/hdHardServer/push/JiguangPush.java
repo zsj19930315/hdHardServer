@@ -10,6 +10,7 @@ package cn.org.fjiot.hdHardServer.push;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import cn.jiguang.common.ClientConfig;
 import cn.jiguang.common.resp.APIConnectionException;
@@ -31,6 +32,7 @@ import cn.jpush.api.push.model.notification.Notification;
 * @date 2017年12月6日 下午2:58:53 
 *  
 */
+@Component
 public class JiguangPush {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(JiguangPush.class);
@@ -41,6 +43,9 @@ public class JiguangPush {
 	
 	private static final String ALERT = "fuck you";
 	
+	/*
+	 * 发送给工作人员
+	 */
 	public void jiguangPushStaff() {
 		String alias = "ios";
 		LOGGER.warn("针对别名"+alias+"的用户推送消息");
@@ -51,7 +56,10 @@ public class JiguangPush {
 			LOGGER.warn("针对别名"+alias+"的消息推送失败");
 		}
 	}
-	
+
+	/*
+	 * 发送给工作护士
+	 */
 	public void jiguangPushUser() {
 		String alias = "ios";
 		LOGGER.warn("针对别名"+alias+"的用户推送消息");
@@ -62,7 +70,24 @@ public class JiguangPush {
 			LOGGER.warn("针对别名"+alias+"的消息推送失败");
 		}
 	}
-	
+
+	/*
+	 * 发送给工作游客
+	 */
+	public void jiguangPushVisitor() {
+		String alias = "ios";
+		LOGGER.warn("针对别名"+alias+"的用户推送消息");
+		PushResult result = push(alias, ALERT);
+		if (null != result && result.isResultOK()) {
+			LOGGER.warn("针对别名"+alias+"的消息推送成功");
+		} else {
+			LOGGER.warn("针对别名"+alias+"的消息推送失败");
+		}
+	}
+
+	/*
+	 * 发送测试
+	 */
 	public void jiguangPush() {
 		String alias = "ios";
 		LOGGER.warn("针对别名"+alias+"的用户推送消息");
