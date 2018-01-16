@@ -35,6 +35,8 @@ public class Device extends BaseEntityImpl {
 	private String weightCur;
 	
 	private String isLowLevel;
+	
+	private String userName;
 
 	public String getId() {
 		return id;
@@ -162,6 +164,14 @@ public class Device extends BaseEntityImpl {
 
 	public void setIsLowLevel(String isLowLevel) {
 		this.isLowLevel = isLowLevel;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

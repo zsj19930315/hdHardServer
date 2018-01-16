@@ -52,6 +52,6 @@
 		select * from SJ_DEVICE
 	</select>
 	<select id="selectOne" parameterType="string" resultType="Device">
-		select * from SJ_DEVICE where DEVICE_NO = #{deviceNo}
+		select d.*, u.NAME "USER_NAME" from SJ_DEVICE d, SJ_USER u where d.DEVICE_NO = #{deviceNo} and d.USER_ID = u.ID
 	</select>
 </mapper>

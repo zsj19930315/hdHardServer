@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import cn.org.fjiot.hdHardServer.entity.Device;
 import cn.org.fjiot.hdHardServer.mapper.DeviceMapper;
 import cn.org.fjiot.hdHardServer.other.RSData;
+import cn.org.fjiot.hdHardServer.push.JiguangPush;
 import cn.org.fjiot.hdHardServer.util.Constants;
 import cn.org.fjiot.hdHardServer.util.TimeUtil;
 import cn.org.fjiot.hdHardServer.util.Util;
@@ -34,6 +35,9 @@ public class DeviceService {
 	
 	@Autowired
 	DeviceMapper deviceMapper;
+	
+	@Autowired
+	private JiguangPush jiguangPush;
 	
 	public RSData start(RSData receive) {
 		Device device = deviceMapper.selectOne(receive.deviceNo);
@@ -69,6 +73,7 @@ public class DeviceService {
 		device.setElectric(receive.data);
 		if (15 >= elec) {
 			device.setIsLowElec("1");
+			jiguangPush.push(device.getUserName(), "设备电量过低");
 		} else {
 			device.setIsLowElec("0");
 		}
@@ -90,6 +95,7 @@ public class DeviceService {
 		int cur = Util.string2Int(receive.data);
 		if (cur >= threshold && cur <= sum) {
 			device.setIsLowLevel("1");
+			jiguangPush.push(device.getUserName(), "设备容量不足");
 			device.setWeightCur(receive.data);
 			deviceMapper.update(device);
 			receive.alter(Constants.FUNCODE_CODE_ALARM, Constants.REPEAT_LEN_ONE, Constants.REPEAT_LEN_NODATA_ONE);
@@ -97,6 +103,7 @@ public class DeviceService {
 		}
 		if (cur > sum) {
 			device.setIsLowLevel("1");
+			jiguangPush.push(device.getUserName(), "设备容量不足");
 			device.setWeightCur(sumWeight);
 			deviceMapper.update(device);
 			receive.alter(Constants.FUNCODE_CODE_ALARM, Constants.REPEAT_LEN_ONE, Constants.REPEAT_LEN_NODATA_ONE);
@@ -129,6 +136,20 @@ public class DeviceService {
 		deviceMapper.update(device);
 		receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, Constants.REPEAT_LEN_NODATA_TWO);
 		return receive;
+	}
+
+	/**
+	 * @return the jiguangPush
+	 */
+	public JiguangPush getJiguangPush() {
+		return jiguangPush;
+	}
+
+	/**
+	 * @param jiguangPush the jiguangPush to set
+	 */
+	public void setJiguangPush(JiguangPush jiguangPush) {
+		this.jiguangPush = jiguangPush;
 	}
 
 }
