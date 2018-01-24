@@ -73,7 +73,7 @@ public class DeviceService {
 		device.setElectric(receive.data);
 		if (15 >= elec) {
 			device.setIsLowElec("1");
-			jiguangPush.push(device.getUserName(), "设备电量过低");
+			jiguangPush.push(device.getUserName(), device.getRoomBed()+"设备电量过低,电量："+device.getElectric());
 		} else {
 			device.setIsLowElec("0");
 		}
@@ -95,7 +95,7 @@ public class DeviceService {
 		int cur = Util.string2Int(receive.data);
 		if (cur >= threshold && cur <= sum) {
 			device.setIsLowLevel("1");
-			jiguangPush.push(device.getUserName(), "设备容量不足");
+			jiguangPush.push(device.getUserName(), device.getRoomBed()+"设备容量不足");
 			device.setWeightCur(receive.data);
 			deviceMapper.update(device);
 			receive.alter(Constants.FUNCODE_CODE_ALARM, Constants.REPEAT_LEN_ONE, Constants.REPEAT_LEN_NODATA_ONE);
@@ -103,13 +103,13 @@ public class DeviceService {
 		}
 		if (cur > sum) {
 			device.setIsLowLevel("1");
-			jiguangPush.push(device.getUserName(), "设备容量不足");
+			jiguangPush.push(device.getUserName(), device.getRoomBed()+"设备容量不足");
 			device.setWeightCur(sumWeight);
 			deviceMapper.update(device);
 			receive.alter(Constants.FUNCODE_CODE_ALARM, Constants.REPEAT_LEN_ONE, Constants.REPEAT_LEN_NODATA_ONE);
 			return receive;
 		}
-		if (cur < last) {
+		if (cur < last && 5 > (last - cur)) {
 			device.setIsError("1");
 			device.setWeightCur(lastWeight);
 			deviceMapper.update(device);
