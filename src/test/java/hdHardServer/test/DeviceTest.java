@@ -41,9 +41,9 @@ public class DeviceTest {
 	
 	@Test
 	public void test() {
-		String test = "test";
-		Device newDevice = new Device();
-		newDevice.setDeviceNo("00000011");
+//		String test = "test";
+//		Device newDevice = new Device();
+//		newDevice.setDeviceNo("00000011");
 //		newDevice.setElectric(test);
 //		newDevice.setEndTime(test);
 //		newDevice.setIsError(test);
@@ -58,13 +58,14 @@ public class DeviceTest {
 //		newDevice.setWeightCur(test);
 //		newDevice.setWeightSum(test);
 //		newDevice.setWeightThreshold(test);
-		deviceMapper.add(newDevice);
+//		deviceMapper.add(newDevice);
 //		List<Device> devices = deviceMapper.selectList();
 //		for (Device device : devices) {
 //			LOGGER.error(device.toString());
 //		}
 //		Device device = deviceMapper.selectOne("00000002");
 //		LOGGER.error(device.toString());
+		System.out.println("hello test");
 	}
 
 }
