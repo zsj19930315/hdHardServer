@@ -26,10 +26,10 @@ public class TimeUtil {
 	}
 	
 	/*
-	 * 设置下次发送的时间（先设置为05dc-15s）
+	 * 设置下次发送的时间（先设置为0dac-35s）
 	 */
 	public static String getNextTime() {
-		return "05dc";
+		return "0dac";
 	}/*
 	 * 设置下次发送的时间（最长300000s-5分钟-7530
 	 */

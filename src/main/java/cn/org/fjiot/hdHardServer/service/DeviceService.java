@@ -114,7 +114,7 @@ public class DeviceService {
 			device.setWeightCur(lastWeight);
 			deviceMapper.update(device);
 			int timeCount = (sum - last) * 10 / sum;
-			receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, TimeUtil.getNextTime(timeCount));
+			receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, TimeUtil.getNextTime());
 			return receive;
 		}
 		int timeCount = (sum - cur) * 10 / sum;
@@ -122,7 +122,7 @@ public class DeviceService {
 		device.setIsError("0");
 		device.setWeightCur(receive.data);
 		deviceMapper.update(device);
-		receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, TimeUtil.getNextTime(timeCount));
+		receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, TimeUtil.getNextTime());
 		return receive;
 	}
 
