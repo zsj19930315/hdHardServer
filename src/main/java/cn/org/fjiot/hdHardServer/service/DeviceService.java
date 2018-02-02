@@ -58,7 +58,7 @@ public class DeviceService {
 		device.setIsStart("1");
 		device.setStartTime(TimeUtil.getNowTime());
 		device.setWeightSum(receive.data);
-		device.setWeightThreshold(Util.int2String(Util.string2Int(receive.data)/10*9));
+		device.setWeightThreshold(Util.int2String(Util.string2Int(receive.data) - Constants.THRESHOLD));
 		device.setWeightCur("0");
 		deviceMapper.update(device);
 		receive.alter(Constants.FUNCODE_CODE_STARTED, Constants.REPEAT_LEN_TWO, receive.oldData);

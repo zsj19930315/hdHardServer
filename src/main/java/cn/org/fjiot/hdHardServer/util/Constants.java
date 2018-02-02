@@ -17,6 +17,8 @@ package cn.org.fjiot.hdHardServer.util;
 */
 public class Constants {
 	
+	public static final int THRESHOLD = 10;
+	
 	//RSChannel
 	public static final int PORT = 9876;
 	
