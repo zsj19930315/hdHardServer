@@ -73,7 +73,7 @@ public class DeviceService {
 		device.setElectric(receive.data);
 		if (15 >= elec) {
 			device.setIsLowElec("1");
-			jiguangPush.push(device.getUserName(), device.getRoomBed()+"设备电量过低,电量："+device.getElectric());
+			jiguangPush.push(device.getUserName(), device.getRoomBed()+"设备电量过低,电量："+device.getElectric()+"%");
 		} else {
 			device.setIsLowElec("0");
 		}
