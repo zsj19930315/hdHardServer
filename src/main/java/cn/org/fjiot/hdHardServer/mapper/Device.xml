@@ -25,7 +25,7 @@
 			order="BEFORE">
 			select sys_guid() from dual
 		</selectKey>
-		insert into SJ_DEVICE values (#{id}, #{deviceNo}, #{isStart,jdbcType=VARCHAR}, #{electric,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roomBed,jdbcType=VARCHAR}, #{isLowElec,jdbcType=VARCHAR}, #{isLose,jdbcType=VARCHAR}, #{isError,jdbcType=VARCHAR}, #{weightSum,jdbcType=VARCHAR}, #{weightThreshold,jdbcType=VARCHAR}, #{weightCur,jdbcType=VARCHAR}, #{isLowLevel,jdbcType=VARCHAR})
+		insert into SJ_DEVICE values (#{id}, #{deviceNo}, #{isStart,jdbcType=VARCHAR}, #{electric,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roomBed,jdbcType=VARCHAR}, #{isLowElec,jdbcType=VARCHAR}, #{isLose,jdbcType=VARCHAR}, #{isError,jdbcType=VARCHAR}, #{weightSum,jdbcType=VARCHAR}, #{weightThreshold,jdbcType=VARCHAR}, #{weightCur,jdbcType=VARCHAR}, #{isLowLevel,jdbcType=VARCHAR}, #{isPercent,jdbcType=VARCHAR}, #{isSuspend,jdbcType=VARCHAR})
 	</insert>
 	<update id="update" parameterType="Device">
 		update SJ_DEVICE 
@@ -44,7 +44,9 @@
 			<if test="weightSum != null">WEIGHT_SUM = #{weightSum},</if>
 			<if test="weightThreshold != null">WEIGHT_THRESHOLD = #{weightThreshold},</if>
 			<if test="weightCur != null">WEIGHT_CUR = #{weightCur},</if>
-			<if test="isLowLevel != null">IS_LOW_LEVEL = #{isLowLevel}</if>
+			<if test="isLowLevel != null">IS_LOW_LEVEL = #{isLowLevel},</if>
+			<if test="isPercent != null">IS_PERCENT = #{isPercent},</if>
+			<if test="isSuspend != null">IS_SUSPEND = #{isSuspend}</if>
 		</set>
 		where id = #{id}
 	</update>

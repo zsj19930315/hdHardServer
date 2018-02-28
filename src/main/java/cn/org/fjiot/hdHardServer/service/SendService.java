@@ -67,6 +67,8 @@ public class SendService implements Runnable {
 		case Constants.FUNCODE_CODE_END:
 			receive = deviceService.end(receive);
 			break;
+		case Constants.FUNCODE_CODE_SUSPEND:
+			receive = deviceService.suspend(receive);
 		default:
 			break;
 		}

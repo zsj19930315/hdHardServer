@@ -37,6 +37,10 @@ public class Device extends BaseEntityImpl {
 	private String isLowLevel;
 	
 	private String userName;
+	
+	private String isPercent;
+	
+	private String isSuspend;
 
 	public String getId() {
 		return id;
@@ -172,6 +176,22 @@ public class Device extends BaseEntityImpl {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getIsPercent() {
+		return isPercent;
+	}
+
+	public void setIsPercent(String isPercent) {
+		this.isPercent = isPercent;
+	}
+
+	public String getIsSuspend() {
+		return isSuspend;
+	}
+
+	public void setIsSuspend(String isSuspend) {
+		this.isSuspend = isSuspend;
 	}
 
 }

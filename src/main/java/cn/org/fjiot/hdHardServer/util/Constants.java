@@ -59,6 +59,8 @@ public class Constants {
 	
 	public static final String FUNCODE_CODE_END = "07";
 	
+	public static final String FUNCODE_CODE_SUSPEND = "09";
+	
 	//DeviceService
 	public static final String FUNCODE_CODE_STARTED = "04";
 	

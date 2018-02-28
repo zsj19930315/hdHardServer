@@ -86,6 +86,7 @@ public class DeviceService {
 		Device device = deviceMapper.selectOne(receive.deviceNo);
 		device.setUpdateTime(TimeUtil.getNowTime());
 		device.setIsLose("0");
+		device.setIsSuspend("0");
 		String sumWeight = device.getWeightSum();
 		String lastWeight = device.getWeightCur();
 		String thresholdWeight = device.getWeightThreshold();
@@ -129,10 +130,19 @@ public class DeviceService {
 	public RSData end(RSData receive) {
 		Device device = deviceMapper.selectOne(receive.deviceNo);
 		device.setEndTime(TimeUtil.getNowTime());
+		device.setIsSuspend("0");
 		device.setIsError("0");
 		device.setIsLose("0");
 		device.setIsLowLevel("0");
 		device.setIsStart("0");
+		deviceMapper.update(device);
+		receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, Constants.REPEAT_LEN_NODATA_TWO);
+		return receive;
+	}
+	
+	public RSData suspend(RSData receive) {
+		Device device = deviceMapper.selectOne(receive.deviceNo);
+		device.setIsSuspend("1");
 		deviceMapper.update(device);
 		receive.alter(Constants.FUNCODE_CODE_REPLY, Constants.REPEAT_LEN_TWO, Constants.REPEAT_LEN_NODATA_TWO);
 		return receive;
